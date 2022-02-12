@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './index.css';
+import { currencies } from './buisnessLogicConfig';
 const SELLER_COUNTRY_CODE = 'US'; // US, EU, UK
 
 const product= {
@@ -20,8 +21,11 @@ const product= {
 const classNames = (...classes)  => classes.filter(Boolean).join(' ')
 
 export default function App() {
+  const [buyCurrencyCode, setBuyierCurrencyCode] = useState('EUR');
+
   return (
     <div className="bg-white">
+      {buyCurrencyCode}
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">Order Details</h1>
 
@@ -72,14 +76,19 @@ export default function App() {
                       </dd>
                     </div>
                     <div>
-                      <dt className="font-medium text-gray-900">Shipping updates</dt>
-                      <dd className="mt-3 text-gray-500 space-y-3">
-                        <p>{product.email}</p>
-                        <p>{product.phone}</p>
-                        <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500">
-                          Edit
-                        </button>
-                      </dd>
+                      <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                        Currency
+                      </label>
+                      <select
+                        value={buyCurrencyCode}
+                        onChange={(e) => setBuyierCurrencyCode(e.target.value)}
+                        id="country"
+                        name="country"
+                        autoComplete="country-name"
+                        className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                      >
+                        {currencies.map(({ currencyCode }) => <option key={currencyCode}>{currencyCode}</option>)}
+                      </select>
                     </div>
                   </dl>
                   <p className="font-medium text-gray-900 mt-6 md:mt-10">
