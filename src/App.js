@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './index.css';
-import { currencies } from './buisnessLogicConfig';
+import { currencies, countries } from './buisnessLogicConfig';
 const SELLER_COUNTRY_CODE = 'US'; // US, EU, UK
 
 const product= {
@@ -21,7 +21,8 @@ const product= {
 const classNames = (...classes)  => classes.filter(Boolean).join(' ')
 
 export default function App() {
-  const [buyCurrencyCode, setBuyierCurrencyCode] = useState('EUR');
+  const [buyCurrencyCode, setBuyerCurrencyCode] = useState('GBP');
+  const [deliveryCountryCode, setDeliveryCountryCode] = useState('UK');
 
   return (
     <div className="bg-white">
@@ -67,13 +68,20 @@ export default function App() {
                 </div>
                 <div className="sm:col-span-12 md:col-span-7">
                   <dl className="grid grid-cols-1 gap-y-8 border-b py-8 border-gray-200 sm:grid-cols-2 sm:gap-x-6 sm:py-6 md:py-10">
-                    <div>
-                      <dt className="font-medium text-gray-900">Delivery address</dt>
-                      <dd className="mt-3 text-gray-500">
-                        <span className="block">{product.address[0]}</span>
-                        <span className="block">{product.address[1]}</span>
-                        <span className="block">{product.address[2]}</span>
-                      </dd>
+                  <div>
+                      <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                        Delivery Country
+                      </label>
+                      <select
+                        value={deliveryCountryCode}
+                        onChange={(e) => setDeliveryCountryCode(e.target.value)}
+                        id="country"
+                        name="country"
+                        autoComplete="country-name"
+                        className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                      >
+                        {countries.map(({ countryCode }) => <option key={countryCode}>{countryCode}</option>)}
+                      </select>
                     </div>
                     <div>
                       <label htmlFor="country" className="block text-sm font-medium text-gray-700">
@@ -81,7 +89,7 @@ export default function App() {
                       </label>
                       <select
                         value={buyCurrencyCode}
-                        onChange={(e) => setBuyierCurrencyCode(e.target.value)}
+                        onChange={(e) => setBuyerCurrencyCode(e.target.value)}
                         id="country"
                         name="country"
                         autoComplete="country-name"
