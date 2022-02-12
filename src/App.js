@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './index.css';
 import { currencies, countries } from './buisnessLogicConfig';
-const SELLER_COUNTRY_CODE = 'US'; // US, EU, UK
+import productCalculationsHook from './productCaulculationsHook';
 
 const product= {
     id: 1,
@@ -19,10 +19,10 @@ const product= {
     imageSrc: '/shoe.jpg',
   }
 const classNames = (...classes)  => classes.filter(Boolean).join(' ')
-
 export default function App() {
   const [buyCurrencyCode, setBuyerCurrencyCode] = useState('GBP');
   const [deliveryCountryCode, setDeliveryCountryCode] = useState('UK');
+  const { deliveryData } = productCalculationsHook({ buyCurrencyCode, deliveryCountryCode })
 
   return (
     <div className="bg-white">
@@ -175,8 +175,8 @@ export default function App() {
                 <dd className="font-medium text-gray-900">$72</dd>
               </div>
               <div className="py-4 flex items-center justify-between">
-                <dt className="text-gray-600">Shipping</dt>
-                <dd className="font-medium text-gray-900">$5</dd>
+                <dt className="text-gray-600">Delivery</dt>
+                <dd className="font-medium text-gray-900">{deliveryData.currencySymbol}{deliveryData.totalDeliveryCost}</dd>
               </div>
               <div className="py-4 flex items-center justify-between">
                 <dt className="text-gray-600">Tax</dt>

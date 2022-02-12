@@ -1,5 +1,5 @@
 export const exchangeRateSwingFactor = 0.03;
-
+export const sameCountryDeliveryTax = 0;
 export const currencies = [
     {
         currencyCode: 'USD',
@@ -9,7 +9,6 @@ export const currencies = [
             GBP: 0.74,
         },
         deliveryCharge: 5,
-        additionalDeliveryTax: 0.20,
     },
     {
         currencyCode: 'EUR',
@@ -19,7 +18,6 @@ export const currencies = [
             GBP: 0.83,
         },
         deliveryCharge: 5,
-        additionalDeliveryTax: 0.20,
     },
     {
         currencyCode: 'GBP',
@@ -29,11 +27,11 @@ export const currencies = [
             USD: 1.36,
         },
         deliveryCharge: 5,
-        additionalDeliveryTax: 0.20,
     },
 ]
 
 const [USD, EUR, GBP]  = currencies;
+
 export const countries = [
     {
         countryCode: 'EUR',
@@ -42,8 +40,10 @@ export const countries = [
         processingFee: 0.03,
         deliveryCost: {
             UK: 5,
-            US: 5
-        }
+            US: 5,
+            EUR: 5
+        },
+        additionalDeliveryTax: 0.20,
     },
     {
         countryCode: 'US',
@@ -51,9 +51,11 @@ export const countries = [
         sameCountryProcessingFee: 0,
         processingFee: 0.04,
         deliveryCost: {
-            EUR: 5,
-            UK: 5
-        }
+            UK: 5,
+            US: 5,
+            EUR: 5
+        },
+        additionalDeliveryTax: 0.20,
     },
     {
         countryCode: 'UK',
@@ -61,8 +63,10 @@ export const countries = [
         sameCountryProcessingFee: 0,
         processingFee: 0.02,
         deliveryCost: {
-            EUR: 5,
-            US: 5
-        }
+            UK: 5,
+            US: 5,
+            EUR: 5
+        },
+        additionalDeliveryTax: 0.20,
     },
 ]
