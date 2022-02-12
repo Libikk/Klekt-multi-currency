@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import './index.css';
 import { currencies, countries } from './buisnessLogicConfig';
 import productCalculationsHook from './productCaulculationsHook';
-
-const product= {
+export const product = {
     id: 1,
-    name: 'Distant Mountains Artwork Tee',
+    countryCode: 'US', // US, EU, UK
     price: 87,
+    name: 'Distant Mountains Artwork Tee',
     description: `KLEKT is Europe's original sneaker and streetwear trading marketplace. Having been established since 2013 KLEKT has`,
     address: ['Floyd Miles', '7363 Cynthia Pass', 'Toronto, ON N3Y 4H8'],
     email: 'f•••@example.com',
