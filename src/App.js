@@ -175,7 +175,7 @@ export default function App() {
                 <dd className="font-medium text-gray-900">$72</dd>
               </div>
               <div className="py-4 flex items-center justify-between">
-                <dt className="text-gray-600">Delivery</dt>
+                <dt className="text-gray-600">Delivery (Additional Taxes {deliveryData.additionalTax * 100}%)</dt>
                 <dd className="font-medium text-gray-900">{deliveryData.currencySymbol}{deliveryData.totalDeliveryPrice}</dd>
               </div>
               <div className="py-4 flex items-center justify-between">

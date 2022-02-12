@@ -15,6 +15,7 @@ const productCalculationsHook = ({ buyCurrencyCode, deliveryCountryCode }) => {
       const deliveryWithAdditionalTax = deliveryAdditionalTax + deliveryCostToSelectedCountry;
 
       return {
+          additionalTax,
           totalDeliveryPrice: deliveryWithAdditionalTax,
           currencySymbol: selectedCurrencyData.currencySymbol
         }
