@@ -6,7 +6,7 @@ const productCalculationsHook = ({ buyCurrencyCode, deliveryCountryCode }) => {
     const selectedCountryData = countries.find(({ countryCode }) => countryCode === deliveryCountryCode)
     const sellerCountryData = countries.find(({ countryCode }) => countryCode === SELLER_COUNTRY_CODE)
 
-    const getDeliveryCost = () => {
+    const calculateDelivery = () => {
       const deliveryCostToSelectedCountry = sellerCountryData.deliveryCost[deliveryCountryCode]
 
       const isDeliveryToSameCountry = SELLER_COUNTRY_CODE === deliveryCountryCode
@@ -15,12 +15,26 @@ const productCalculationsHook = ({ buyCurrencyCode, deliveryCountryCode }) => {
       const deliveryWithAdditionalTax = deliveryAdditionalTax + deliveryCostToSelectedCountry;
 
       return {
-          totalDeliveryCost: deliveryWithAdditionalTax,
+          totalDeliveryPrice: deliveryWithAdditionalTax,
           currencySymbol: selectedCurrencyData.currencySymbol
         }
     }
 
-    const deliveryData = getDeliveryCost({ buyCurrencyCode, deliveryCountryCode })
+    // const calculateShoeCost = () => {
+    //   const deliveryCostToSelectedCountry = sellerCountryData.deliveryCost[deliveryCountryCode]
+
+    //   const isDeliveryToSameCountry = SELLER_COUNTRY_CODE === deliveryCountryCode
+    //   const additionalTax = isDeliveryToSameCountry ? sameCountryDeliveryTax : selectedCountryData.additionalDeliveryTax;
+    //   const deliveryAdditionalTax = deliveryCostToSelectedCountry * additionalTax;
+    //   const deliveryWithAdditionalTax = deliveryAdditionalTax + deliveryCostToSelectedCountry;
+
+    //   return {
+    //       totalDeliveryPrice: deliveryWithAdditionalTax,
+    //       currencySymbol: selectedCurrencyData.currencySymbol
+    //     }
+    // }
+
+    const deliveryData = calculateDelivery({ buyCurrencyCode, deliveryCountryCode })
 
     return {
         deliveryData: deliveryData
