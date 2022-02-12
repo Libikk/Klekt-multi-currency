@@ -33,7 +33,7 @@ export const currencies = [
 const [USD, EUR, GBP]  = currencies;
 export const countries = [
     {
-        countryCode: 'DE',
+        countryCode: 'EUR',
         localCurrency: EUR,
         sameCountryProcessingFee: 0,
         processingFee: 0.03,
@@ -48,7 +48,7 @@ export const countries = [
         sameCountryProcessingFee: 0,
         processingFee: 0.04,
         deliveryCost: {
-            DE: 5,
+            EUR: 5,
             UK: 5
         }
     },
@@ -58,7 +58,7 @@ export const countries = [
         sameCountryProcessingFee: 0,
         processingFee: 0.02,
         deliveryCost: {
-            DE: 5,
+            EUR: 5,
             US: 5
         }
     },

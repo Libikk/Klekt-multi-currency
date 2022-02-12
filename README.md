@@ -46,9 +46,3 @@ In addition to the above parameters, there are exchange rates required.
 - 1 Euro (€) = 0.83 Pound (£)
 - 1 USD ($) = 0.74 Pound (£)
 - 1 USD ($) = 0.88 Euro (€)
-
-
-
-
-# plan
-1.

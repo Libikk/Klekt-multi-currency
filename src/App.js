@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import './index.css';
+const SELLER_COUNTRY_CODE = 'US'; // US, EU, UK
 
-const products = [
-  {
+const product= {
     id: 1,
     name: 'Distant Mountains Artwork Tee',
     price: 87,
@@ -16,11 +16,10 @@ const products = [
     date: 'March 24, 2022',
     datetime: '2022-03-24',
     imageSrc: '/shoe.jpg',
-  },
-]
+  }
 const classNames = (...classes)  => classes.filter(Boolean).join(' ')
 
-export default function Example() {
+export default function App() {
   return (
     <div className="bg-white">
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -46,7 +45,6 @@ export default function Example() {
           <h2 className="sr-only">Products purchased</h2>
 
           <div className="space-y-24">
-            {products.map((product) => (
               <div
                 key={product.id}
                 className="grid grid-cols-1 text-sm sm:grid-rows-1 sm:grid-cols-12 sm:gap-x-6 md:gap-x-8 lg:gap-x-8"
@@ -109,7 +107,6 @@ export default function Example() {
                   </div>
                 </div>
               </div>
-            ))}
           </div>
         </div>
 
