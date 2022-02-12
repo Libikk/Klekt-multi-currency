@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# KLEKT Technical Test - #001A - Shoe Price Calculator.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Present solution through screen sharing ( and/or through git repo ).
+- Stipulate any assumptions made.
+- Time estimate 2-3hrs.
 
-## Available Scripts
+## Tasks
 
-In the project directory, you can run:
+Given several inputs listed in the business rules, write a programme to deduce an overall calculated price for the cost of a listed shoe to the buyer’s location.
 
-### `npm start`
+a. The calculation should satisfy the following scenario …
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+*"There is a shoe seller based in <location1\>. With the buyer based in <location2\>. the total price of of the shoe would be <calcluatedPrice\>."*
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+**Input parameters**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+There are several input parameters to consider for the overall calculated shoe price.
 
-### `npm run build`
+1. Initial listing price for the shoe by Seller.
+2. Seller location ( can be either UK, US or EU ).
+3. Shoe processing fee ( fixed @ 2% for UK, 4% for US, 3%  for EU ).
+4. Buyer location ( can be either UK, US, or EU ).
+5. Delivery charge ( can be either UK ( £5 ), US ( $5 ), or EU ( €5 ) ).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+b. Decide on a simple interface which is able to demonstrate the calculation and overall calculation for the end user.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+c. Decide what test senarios are needed and demonstrate coverage.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+d. Use any of the shoes listed on the Klekt website for your shoe listing input data. https://www.klekt.com
 
-### `npm run eject`
+e. Be prepared to walkthrough the solution and give some idea as to consideration on production where delivery costs and exchange rates are not fixed, but may need to be calculated in real time.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Business rules ...
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If the shoe is in same location there is no additional delivery tax.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Target delivery costs will vary from country to country.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+In addition to the above parameters, there are exchange rates required.
 
-## Learn More
+*Exchange rates*
+- 1 Pound (£) = 1.20 Euro (€)
+- 1 Pound (£) = 1.36 USD ($)
+- 1 Euro (€) = 1.13 USD ($)
+- 1 Euro (€) = 0.83 Pound (£)
+- 1 USD ($) = 0.74 Pound (£)
+- 1 USD ($) = 0.88 Euro (€)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# plan
+1.
