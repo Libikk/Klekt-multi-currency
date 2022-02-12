@@ -9,6 +9,7 @@ export const currencies = [
             GBP: 0.74,
         },
         deliveryCharge: 5,
+        additionalDeliveryTax: 0.20,
     },
     {
         currencyCode: 'EUR',
@@ -18,6 +19,7 @@ export const currencies = [
             GBP: 0.83,
         },
         deliveryCharge: 5,
+        additionalDeliveryTax: 0.20,
     },
     {
         currencyCode: 'GBP',
@@ -27,6 +29,7 @@ export const currencies = [
             USD: 1.36,
         },
         deliveryCharge: 5,
+        additionalDeliveryTax: 0.20,
     },
 ]
 
