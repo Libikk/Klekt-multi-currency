@@ -1,4 +1,4 @@
-// all these data would be coming from DB or some envarioment variables config or specific api endpoint for the purpose? As you prefer!
+// static data that isn't dynamic for the unit test purposes
 
 export const exchangeRateSwingFactor = 0.03;
 export const sameCountryDeliveryTax = 0;
