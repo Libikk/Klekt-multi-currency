@@ -8,4 +8,5 @@
 - Refactor changes:
     - separate components to improve readability
     - split product calculation into separate functions for more test coverage
+    - possibly rename some variables
 
