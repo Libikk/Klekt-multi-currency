@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { RadioGroup } from '@headlessui/react'
 import './index.css';
 import { currencies, countries } from './buisnessLogicConfig';
 import productCalculationsHook from './productCaulculationsHook';
@@ -6,6 +7,12 @@ export const product = {
     id: 1,
     countryCode: 'UK', // US, EU, UK
     price: 87,
+    sizes: [
+      { size: 6, price: 65 },
+      { size: 7.5, price: 77 },
+      { size: 8, price: 88 },
+      { size: 10, price: 85 },
+    ],
     name: 'Distant Mountains Artwork Tee',
     description: `KLEKT is Europe's original sneaker and streetwear trading marketplace. Having been established since 2013 KLEKT has`,
     address: ['Floyd Miles', '7363 Cynthia Pass', 'Toronto, ON N3Y 4H8'],
@@ -22,7 +29,14 @@ const classNames = (...classes)  => classes.filter(Boolean).join(' ')
 export default function App() {
   const [buyCurrencyCode, setBuyerCurrencyCode] = useState('GBP');
   const [deliveryCountryCode, setDeliveryCountryCode] = useState('UK');
-  const { deliveryData, shoePriceData, totalOrderCost } = productCalculationsHook({ buyCurrencyCode, deliveryCountryCode })
+  const [shoeSelectedSize, setShoeSelectedSize] = useState(product.sizes[0]);
+
+  const { deliveryData, shoePriceData, totalOrderCost } = productCalculationsHook({
+    buyCurrencyCode,
+    deliveryCountryCode,
+    shoePrice: shoeSelectedSize.price,
+    sellerCountryCode: product.countryCode
+  })
 
 
   const isAdditionalTaxVisible = Boolean(deliveryData.additionalTax * 100);
@@ -101,6 +115,37 @@ export default function App() {
                       </select>
                     </div>
                   </dl>
+                  <div>
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-sm font-medium text-gray-900">Avilable Sizes</h2>
+                  </div>
+
+                  <RadioGroup value={shoeSelectedSize} onChange={setShoeSelectedSize} className="mt-2">
+                    <RadioGroup.Label className="sr-only">Choose a memory option</RadioGroup.Label>
+                    <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+                      {product.sizes.map((option) => (
+                        <RadioGroup.Option
+                          key={option.price}
+                          value={option}
+                          className={({ active, checked }) =>
+                            classNames(
+                              active ? 'ring-2 ring-offset-2 ring-indigo-500' : '',
+                              checked
+                                ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700'
+                                : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
+                              'border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1 cursor-pointer'
+                            )
+                          }
+                        >
+                          <RadioGroup.Label as="div" className='flex justify-center flex-col items-center'>
+                              <div>{option.size} UK</div>
+                              <div className='opacity-50'>{}{option.price}</div>
+                          </RadioGroup.Label>
+                        </RadioGroup.Option>
+                      ))}
+                    </div>
+                  </RadioGroup>
+                </div>
                   <p className="font-medium text-gray-900 mt-6 md:mt-10">
                     {product.status} on <time dateTime={product.datetime}>{product.date}</time>
                   </p>
