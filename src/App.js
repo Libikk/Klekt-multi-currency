@@ -24,6 +24,8 @@ export default function App() {
   const [deliveryCountryCode, setDeliveryCountryCode] = useState('UK');
   const { deliveryData, shoePriceData, totalOrderCost } = productCalculationsHook({ buyCurrencyCode, deliveryCountryCode })
 
+
+  const isAdditionalTaxVisible = Boolean(deliveryData.additionalTax * 100);
   return (
     <div className="bg-white">
       {buyCurrencyCode}
@@ -175,7 +177,7 @@ export default function App() {
                 <dd className="font-medium text-gray-900">{deliveryData.currencySymbol}{shoePriceData.shoePrice.toFixed(2)}</dd>
               </div>
               <div className="py-4 flex items-center justify-between">
-                <dt className="text-gray-600">Delivery (Additional Taxes {deliveryData.additionalTax * 100}%)</dt>
+                 <dt className="text-gray-600">Delivery {isAdditionalTaxVisible && `(Additional Taxes ${deliveryData.additionalTax * 100}%)`}</dt>
                 <dd className="font-medium text-gray-900">{deliveryData.currencySymbol}{deliveryData.totalDeliveryPrice}</dd>
               </div>
               {/* <div className="py-4 flex items-center justify-between">
