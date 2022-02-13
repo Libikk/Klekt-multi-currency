@@ -59,10 +59,10 @@ export default function App() {
           </select>
         </div>
         <div className='flex flex-col'>
-          <code class="prettyprint">
+          <code>
             Delivery Data: {JSON.stringify(deliveryData)}
           </code>
-          <code class="prettyprint">
+          <code>
             Sheo Price Data: {JSON.stringify(shoePriceData)}
           </code>
         </div>
