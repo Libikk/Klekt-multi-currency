@@ -43,6 +43,7 @@ export default function App() {
   return (
     <div className="bg-white">
       <div>
+      {/* Background data display */}
         <div className='w-40'>
           <label htmlFor="country" className="block text-sm font-medium text-gray-700">
             Seller Country Code
@@ -67,6 +68,8 @@ export default function App() {
           </code>
         </div>
       </div>
+
+      {/* Order Details */}
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">Order Details</h1>
 
