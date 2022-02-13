@@ -5,6 +5,7 @@ export const currencies = [
         currencyCode: 'USD',
         currencySymbol: '$',
         exchangeRates: {
+            USD: 1,
             EUR: 0.88,
             GBP: 0.74,
         },
@@ -15,6 +16,7 @@ export const currencies = [
         currencySymbol: '€',
         exchangeRates: {
             USD: 1.13,
+            EUR: 1,
             GBP: 0.83,
         },
         deliveryCharge: 5,
@@ -23,8 +25,9 @@ export const currencies = [
         currencyCode: 'GBP',
         currencySymbol: '£',
         exchangeRates: {
-            EUR: 1.20,
             USD: 1.36,
+            EUR: 1.20,
+            GBP: 1,
         },
         deliveryCharge: 5,
     },

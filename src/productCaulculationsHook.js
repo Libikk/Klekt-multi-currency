@@ -23,9 +23,13 @@ const productCalculationsHook = ({ buyCurrencyCode, deliveryCountryCode }) => {
     }
 
     const calculateShoePrice = () => {
-        const isSellerSameCurrencyAsSelectedCurrency = sellerCountryData.localCurrency.currencyCode === buyCurrencyCode;
-
-
+        const shoePriceInSelectedCurrency = sellerCountryData.localCurrency.exchangeRates[buyCurrencyCode] * product.price;
+        const processingFeePrice = selectedCountryData.processingFee * shoePriceInSelectedCurrency;
+        return {
+            shoePriceInSelectedCurrency,
+            processingFeePrice,
+            shoePrice: shoePriceInSelectedCurrency + processingFeePrice
+        }
     }
 
     const shoePriceData = calculateShoePrice()
@@ -33,7 +37,8 @@ const productCalculationsHook = ({ buyCurrencyCode, deliveryCountryCode }) => {
 
     return {
         shoePriceData,
-        deliveryData: deliveryData
+        deliveryData,
+        totalOrderCost: shoePriceData.shoePrice + deliveryData.totalDeliveryPrice
     }
 }
 

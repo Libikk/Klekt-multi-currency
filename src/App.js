@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './index.css';
 import { currencies, countries } from './buisnessLogicConfig';
 import productCalculationsHook from './productCaulculationsHook';
 export const product = {
     id: 1,
-    countryCode: 'US', // US, EU, UK
+    countryCode: 'UK', // US, EU, UK
     price: 87,
     name: 'Distant Mountains Artwork Tee',
     description: `KLEKT is Europe's original sneaker and streetwear trading marketplace. Having been established since 2013 KLEKT has`,
@@ -22,7 +22,7 @@ const classNames = (...classes)  => classes.filter(Boolean).join(' ')
 export default function App() {
   const [buyCurrencyCode, setBuyerCurrencyCode] = useState('GBP');
   const [deliveryCountryCode, setDeliveryCountryCode] = useState('UK');
-  const { deliveryData } = productCalculationsHook({ buyCurrencyCode, deliveryCountryCode })
+  const { deliveryData, shoePriceData, totalOrderCost } = productCalculationsHook({ buyCurrencyCode, deliveryCountryCode })
 
   return (
     <div className="bg-white">
@@ -134,11 +134,11 @@ export default function App() {
           <div className="bg-gray-50 rounded-lg py-6 px-6 lg:px-0 lg:py-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
             <dl className="grid grid-cols-1 gap-6 text-sm sm:grid-cols-2 md:gap-x-8 lg:pl-8 lg:col-span-5">
               <div>
-                <dt className="font-medium text-gray-900">Billing address</dt>
+                <dt className="font-medium text-gray-900">Ships from</dt>
                 <dd className="mt-3 text-gray-500">
-                  <span className="block">Floyd Miles</span>
-                  <span className="block">7363 Cynthia Pass</span>
-                  <span className="block">Toronto, ON N3Y 4H8</span>
+                  <span className="block">73 Lorem ipsum</span>
+                  <span className="block">ON N3Y 4H8</span>
+                  <span className="block">{product.countryCode}</span>
                 </dd>
               </div>
               <div>
@@ -171,20 +171,20 @@ export default function App() {
 
             <dl className="mt-8 divide-y divide-gray-200 text-sm lg:mt-0 lg:pr-8 lg:col-span-7">
               <div className="pb-4 flex items-center justify-between">
-                <dt className="text-gray-600">Subtotal</dt>
-                <dd className="font-medium text-gray-900">$72</dd>
+                <dt className="text-gray-600">Shoe price</dt>
+                <dd className="font-medium text-gray-900">{deliveryData.currencySymbol}{shoePriceData.shoePrice.toFixed(2)}</dd>
               </div>
               <div className="py-4 flex items-center justify-between">
                 <dt className="text-gray-600">Delivery (Additional Taxes {deliveryData.additionalTax * 100}%)</dt>
                 <dd className="font-medium text-gray-900">{deliveryData.currencySymbol}{deliveryData.totalDeliveryPrice}</dd>
               </div>
-              <div className="py-4 flex items-center justify-between">
+              {/* <div className="py-4 flex items-center justify-between">
                 <dt className="text-gray-600">Tax</dt>
                 <dd className="font-medium text-gray-900">$6.16</dd>
-              </div>
+              </div> */}
               <div className="pt-4 flex items-center justify-between">
                 <dt className="font-medium text-gray-900">Order total</dt>
-                <dd className="font-medium text-indigo-600">$83.16</dd>
+                <dd className="font-medium text-indigo-600">{deliveryData.currencySymbol}{totalOrderCost.toFixed(2)}</dd>
               </div>
             </dl>
           </div>
