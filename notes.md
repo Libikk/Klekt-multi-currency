@@ -1,6 +1,11 @@
-1. Not sure if its size is coming from the different seller.
+- Not sure if its size is coming from the different seller.
 
 
-2. Adding where supposed to be currency symbol
-3. Refactoring to separate components
-4. Add some rounding to the end prices for the user (rounding on benefit for the company)
+- Adding where supposed to be currency symbol
+- Add some rounding to the end prices for the user (rounding on benefit for the company)
+- Business logic config would look completely differently
+
+- Refactor changes:
+    - separate components to improve readability
+    - split product calculation into separate functions for more test coverage
+
