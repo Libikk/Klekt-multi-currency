@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { RadioGroup } from '@headlessui/react'
 import './index.css';
 import { currencies, countries } from './buisnessLogicConfig';
-import productCalculations from './productCaulculations';
+import getProductCalculations from './productCaulculations';
 export const initialProductData = {
     id: 1,
     countryCode: 'UK', // US, EU, UK
@@ -27,33 +27,45 @@ export default function App() {
   const [deliveryCountryCode, setDeliveryCountryCode] = useState('UK');
   const [shoeSelectedSize, setShoeSelectedSize] = useState(product.sizes[0]);
 
-  const { deliveryData, shoePriceData, totalOrderCost } = productCalculations({
+  const productCalculations = getProductCalculations({
     buyCurrencyCode,
     deliveryCountryCode,
     shoePrice: shoeSelectedSize.price,
     sellerCountryCode: product.countryCode
   })
 
-  const getShoePriceFrom = (shoePrice) => productCalculations({ buyCurrencyCode, deliveryCountryCode, shoePrice, sellerCountryCode: product.countryCode}).shoePriceData.shoePrice
+  const { deliveryData, shoePriceData, totalOrderCost } = productCalculations;
+
+  const getShoePriceFrom = (shoePrice) => getProductCalculations({ buyCurrencyCode, deliveryCountryCode, shoePrice, sellerCountryCode: product.countryCode}).shoePriceData.shoePrice
 
 
   const isAdditionalTaxVisible = Boolean(deliveryData.additionalTax * 100);
   return (
     <div className="bg-white">
-      <div className='w-40'>
-        <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-          Seller Country Code
-        </label>
-        <select
-          value={product.countryCode}
-          onChange={(e) => setProduct({ ...product, countryCode: e.target.value })}
-          id="country"
-          name="country"
-          autoComplete="country-name"
-          className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
-        >
-          {['US', 'EUR', 'UK'].map(countryCode => <option key={countryCode}>{countryCode}</option>)}
-        </select>
+      <div>
+        <div className='w-40'>
+          <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+            Seller Country Code
+          </label>
+          <select
+            value={product.countryCode}
+            onChange={(e) => setProduct({ ...product, countryCode: e.target.value })}
+            id="country"
+            name="country"
+            autoComplete="country-name"
+            className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+            >
+            {['US', 'EUR', 'UK'].map(countryCode => <option key={countryCode}>{countryCode}</option>)}
+          </select>
+        </div>
+        <div className='flex flex-col'>
+          <code class="prettyprint">
+            Delivery Data: {JSON.stringify(deliveryData)}
+          </code>
+          <code class="prettyprint">
+            Sheo Price Data: {JSON.stringify(shoePriceData)}
+          </code>
+        </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">Order Details</h1>
@@ -91,7 +103,7 @@ export default function App() {
                   <h3 className="text-lg font-medium text-gray-900">
                     <a href={product.href}>{product.name}</a>
                   </h3>
-                  <p className="font-medium text-indigo-600 mt-1 text-3xl ">{deliveryData.currencySymbol}{shoePriceData.shoePrice}</p>
+                  <p className="font-medium text-indigo-600 mt-1 text-3xl ">{deliveryData.currencySymbol}{shoePriceData.shoePrice.toFixed(2)}</p>
                   <p className="text-gray-500 mt-3">{product.description}</p>
                 </div>
                 <div className="sm:col-span-12 md:col-span-7">

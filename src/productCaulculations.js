@@ -4,7 +4,7 @@ import {
     sameCountryDeliveryTax
 } from './buisnessLogicConfig';
 
-const productCalculations = ({
+const getProductCalculations = ({
     buyCurrencyCode,
     deliveryCountryCode,
     shoePrice,
@@ -52,4 +52,4 @@ const productCalculations = ({
     }
 }
 
-export default productCalculations;
+export default getProductCalculations;
