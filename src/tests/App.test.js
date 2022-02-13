@@ -1,4 +1,4 @@
-import productCalculations from '../productCaulculations';
+import getProductCalculations from '../productCaulculations';
 import {
   currencies as testCurrenciesData,
   countries as testCountriesData
@@ -6,7 +6,7 @@ import {
 
 // additional delivery
 test('additional delivery tax - same country should be 0', () => {
-  const { deliveryData  } = productCalculations({
+  const { deliveryData  } = getProductCalculations({
     shoePrice: 100,
     sellerCountryCode: 'UK',
     buyCurrencyCode: 'GBP',
@@ -19,7 +19,7 @@ test('additional delivery tax - same country should be 0', () => {
 });
 
 test('additional delivery tax - US to UK tax should be 0.2', () => {
-  const { deliveryData  } = productCalculations({
+  const { deliveryData  } = getProductCalculations({
     shoePrice: 100,
     sellerCountryCode: 'US',
     buyCurrencyCode: 'GBP',
@@ -33,7 +33,7 @@ test('additional delivery tax - US to UK tax should be 0.2', () => {
 
 // shoe price
 test('shoe price - after currency exchange internaltional', () => {
-  const { shoePriceData } = productCalculations({
+  const { shoePriceData } = getProductCalculations({
     shoePrice: 100,
     sellerCountryCode: 'US',
     buyCurrencyCode: 'EUR',
@@ -46,6 +46,15 @@ test('shoe price - after currency exchange internaltional', () => {
 });
 
 test('shoe price - same country', () => {
+  // test
+});
+
+
+test('delivery price - same country', () => {
+  // test
+});
+
+test('delivery price - UK to US', () => {
   // test
 });
 
