@@ -1,6 +1,17 @@
-import { currencies, countries, sameCountryDeliveryTax } from './buisnessLogicConfig';
+import {
+    currencies as buisnessLogicCurrencies,
+    countries as buisnessLogicCountries,
+    sameCountryDeliveryTax
+} from './buisnessLogicConfig';
 
-const productCalculations = ({ buyCurrencyCode, deliveryCountryCode, shoePrice, sellerCountryCode }) => {
+const productCalculations = ({
+    buyCurrencyCode,
+    deliveryCountryCode,
+    shoePrice,
+    sellerCountryCode,
+    currencies = buisnessLogicCurrencies,
+    countries = buisnessLogicCountries
+}) => {
     const selectedCurrencyData = currencies.find(({ currencyCode }) => currencyCode === buyCurrencyCode)
     const selectedCountryData = countries.find(({ countryCode }) => countryCode === deliveryCountryCode)
     const sellerCountryData = countries.find(({ countryCode }) => countryCode === sellerCountryCode)
