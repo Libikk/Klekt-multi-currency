@@ -3,7 +3,7 @@ import { RadioGroup } from '@headlessui/react'
 import './index.css';
 import { currencies, countries } from './buisnessLogicConfig';
 import productCalculations from './productCaulculations';
-export const product = {
+export const initialProductData = {
     id: 1,
     countryCode: 'UK', // US, EU, UK
     price: 87,
@@ -19,8 +19,10 @@ export const product = {
     step: 1,
     imageSrc: '/shoe.jpg',
   }
+
 const classNames = (...classes)  => classes.filter(Boolean).join(' ')
 export default function App() {
+  const [product, setProduct] = useState(initialProductData);
   const [buyCurrencyCode, setBuyerCurrencyCode] = useState('GBP');
   const [deliveryCountryCode, setDeliveryCountryCode] = useState('UK');
   const [shoeSelectedSize, setShoeSelectedSize] = useState(product.sizes[0]);
@@ -38,7 +40,21 @@ export default function App() {
   const isAdditionalTaxVisible = Boolean(deliveryData.additionalTax * 100);
   return (
     <div className="bg-white">
-      {buyCurrencyCode}
+      <div className='w-40'>
+        <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+          Seller Country Code
+        </label>
+        <select
+          value={product.countryCode}
+          onChange={(e) => setProduct({ ...product, countryCode: e.target.value })}
+          id="country"
+          name="country"
+          autoComplete="country-name"
+          className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+        >
+          {['US', 'EUR', 'UK'].map(countryCode => <option key={countryCode}>{countryCode}</option>)}
+        </select>
+      </div>
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">Order Details</h1>
 
@@ -75,44 +91,12 @@ export default function App() {
                   <h3 className="text-lg font-medium text-gray-900">
                     <a href={product.href}>{product.name}</a>
                   </h3>
-                  <p className="font-medium text-gray-900 mt-1">{product.price}</p>
+                  <p className="font-medium text-indigo-600 mt-1 text-3xl ">{deliveryData.currencySymbol}{shoePriceData.shoePrice}</p>
                   <p className="text-gray-500 mt-3">{product.description}</p>
                 </div>
                 <div className="sm:col-span-12 md:col-span-7">
-                  <dl className="grid grid-cols-1 gap-y-8 border-b py-8 border-gray-200 sm:grid-cols-2 sm:gap-x-6 sm:py-6 md:py-10">
                   <div>
-                      <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                        Delivery Country
-                      </label>
-                      <select
-                        value={deliveryCountryCode}
-                        onChange={(e) => setDeliveryCountryCode(e.target.value)}
-                        id="country"
-                        name="country"
-                        autoComplete="country-name"
-                        className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
-                      >
-                        {countries.map(({ countryCode }) => <option key={countryCode}>{countryCode}</option>)}
-                      </select>
-                    </div>
-                    <div>
-                      <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                        Currency
-                      </label>
-                      <select
-                        value={buyCurrencyCode}
-                        onChange={(e) => setBuyerCurrencyCode(e.target.value)}
-                        id="country"
-                        name="country"
-                        autoComplete="country-name"
-                        className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
-                      >
-                        {currencies.map(({ currencyCode }) => <option key={currencyCode}>{currencyCode}</option>)}
-                      </select>
-                    </div>
-                  </dl>
-                  <div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mt-4">
                     <h2 className="text-sm font-medium text-gray-900">Avilable Sizes</h2>
                   </div>
 
@@ -171,65 +155,101 @@ export default function App() {
         </div>
 
         {/* Billing */}
-        <div className="mt-24">
+        <div className="">
           <h2 className="sr-only">Billing Summary</h2>
-
-          <div className="bg-gray-50 rounded-lg py-6 px-6 lg:px-0 lg:py-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
-            <dl className="grid grid-cols-1 gap-6 text-sm sm:grid-cols-2 md:gap-x-8 lg:pl-8 lg:col-span-5">
-              <div>
-                <dt className="font-medium text-gray-900">Ships from</dt>
-                <dd className="mt-3 text-gray-500">
-                  <span className="block">73 Lorem ipsum</span>
-                  <span className="block">ON N3Y 4H8</span>
-                  <span className="block">{product.countryCode}</span>
-                </dd>
-              </div>
-              <div>
-                <dt className="font-medium text-gray-900">Payment information</dt>
-                <dd className="mt-3 flex">
-                  <div>
-                    <svg
-                      aria-hidden="true"
-                      width={36}
-                      height={24}
-                      viewBox="0 0 36 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-auto"
+          <div className='bg-gray-50 rounded-lg py-6 px-6 mt-10'>
+            <div className='flex justify-between'>
+              <div className='text-xl flex items-center font-medium ml-6'>Billing Summary</div>
+              <dl className="flex">
+                <div>
+                  <label htmlFor="country" className="block text-sm font-medium text-gray-700 mr-10">
+                    Delivery Country
+                  </label>
+                  <select
+                    value={deliveryCountryCode}
+                    onChange={(e) => setDeliveryCountryCode(e.target.value)}
+                    id="country"
+                    name="country"
+                    autoComplete="country-name"
+                    className="mt-1 block bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
                     >
-                      <rect width={36} height={24} rx={4} fill="#224DBA" />
-                      <path
-                        d="M10.925 15.673H8.874l-1.538-6c-.073-.276-.228-.52-.456-.635A6.575 6.575 0 005 8.403v-.231h3.304c.456 0 .798.347.855.75l.798 4.328 2.05-5.078h1.994l-3.076 7.5zm4.216 0h-1.937L14.8 8.172h1.937l-1.595 7.5zm4.101-5.422c.057-.404.399-.635.798-.635a3.54 3.54 0 011.88.346l.342-1.615A4.808 4.808 0 0020.496 8c-1.88 0-3.248 1.039-3.248 2.481 0 1.097.969 1.673 1.653 2.02.74.346 1.025.577.968.923 0 .519-.57.75-1.139.75a4.795 4.795 0 01-1.994-.462l-.342 1.616a5.48 5.48 0 002.108.404c2.108.057 3.418-.981 3.418-2.539 0-1.962-2.678-2.077-2.678-2.942zm9.457 5.422L27.16 8.172h-1.652a.858.858 0 00-.798.577l-2.848 6.924h1.994l.398-1.096h2.45l.228 1.096h1.766zm-2.905-5.482l.57 2.827h-1.596l1.026-2.827z"
-                        fill="#fff"
-                      />
-                    </svg>
-                    <p className="sr-only">Visa</p>
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-gray-900">Ending with 4242</p>
-                    <p className="text-gray-600">Expires 02 / 24</p>
-                  </div>
-                </dd>
+                    {countries.map(({ countryCode }) => <option key={countryCode}>{countryCode}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                    Currency
+                  </label>
+                  <select
+                    value={buyCurrencyCode}
+                    onChange={(e) => setBuyerCurrencyCode(e.target.value)}
+                    id="country"
+                    name="country"
+                    autoComplete="country-name"
+                    className="mt-1 block bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                    >
+                    {currencies.map(({ currencyCode }) => <option key={currencyCode}>{currencyCode}</option>)}
+                  </select>
+                </div>
+              </dl>
               </div>
-            </dl>
+            <div className="lg:px-0 lg:py-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
+              <dl className="grid grid-cols-1 gap-6 text-sm sm:grid-cols-2 md:gap-x-8 lg:pl-8 lg:col-span-5">
+                <div>
+                  <dt className="font-medium text-gray-900">Ships from</dt>
+                  <dd className="mt-3 text-gray-500">
+                    <span className="block">73 Lorem ipsum</span>
+                    <span className="block">ON N3Y 4H8</span>
+                    <span className="block">{product.countryCode}</span>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-medium text-gray-900">Payment information</dt>
+                  <dd className="mt-3 flex">
+                    <div>
+                      <svg
+                        aria-hidden="true"
+                        width={36}
+                        height={24}
+                        viewBox="0 0 36 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-auto"
+                      >
+                        <rect width={36} height={24} rx={4} fill="#224DBA" />
+                        <path
+                          d="M10.925 15.673H8.874l-1.538-6c-.073-.276-.228-.52-.456-.635A6.575 6.575 0 005 8.403v-.231h3.304c.456 0 .798.347.855.75l.798 4.328 2.05-5.078h1.994l-3.076 7.5zm4.216 0h-1.937L14.8 8.172h1.937l-1.595 7.5zm4.101-5.422c.057-.404.399-.635.798-.635a3.54 3.54 0 011.88.346l.342-1.615A4.808 4.808 0 0020.496 8c-1.88 0-3.248 1.039-3.248 2.481 0 1.097.969 1.673 1.653 2.02.74.346 1.025.577.968.923 0 .519-.57.75-1.139.75a4.795 4.795 0 01-1.994-.462l-.342 1.616a5.48 5.48 0 002.108.404c2.108.057 3.418-.981 3.418-2.539 0-1.962-2.678-2.077-2.678-2.942zm9.457 5.422L27.16 8.172h-1.652a.858.858 0 00-.798.577l-2.848 6.924h1.994l.398-1.096h2.45l.228 1.096h1.766zm-2.905-5.482l.57 2.827h-1.596l1.026-2.827z"
+                          fill="#fff"
+                        />
+                      </svg>
+                      <p className="sr-only">Visa</p>
+                    </div>
+                    <div className="ml-4">
+                      <p className="text-gray-900">Ending with 4242</p>
+                      <p className="text-gray-600">Expires 02 / 24</p>
+                    </div>
+                  </dd>
+                </div>
+              </dl>
 
-            <dl className="mt-8 divide-y divide-gray-200 text-sm lg:mt-0 lg:pr-8 lg:col-span-7">
-              <div className="pb-4 flex items-center justify-between">
-                <dt className="text-gray-600">Shoe price</dt>
-                <dd className="font-medium text-gray-900">{deliveryData.currencySymbol}{shoePriceData.shoePrice.toFixed(2)}</dd>
-              </div>
-              <div className="py-4 flex items-center justify-between">
-                 <dt className="text-gray-600">Delivery {isAdditionalTaxVisible && `(Additional Taxes ${deliveryData.additionalTax * 100}%)`}</dt>
-                <dd className="font-medium text-gray-900">{deliveryData.currencySymbol}{deliveryData.totalDeliveryPrice}</dd>
-              </div>
-              {/* <div className="py-4 flex items-center justify-between">
-                <dt className="text-gray-600">Tax</dt>
-                <dd className="font-medium text-gray-900">$6.16</dd>
-              </div> */}
-              <div className="pt-4 flex items-center justify-between">
-                <dt className="font-medium text-gray-900">Order total</dt>
-                <dd className="font-medium text-indigo-600">{deliveryData.currencySymbol}{totalOrderCost.toFixed(2)}</dd>
-              </div>
-            </dl>
+              <dl className="mt-8 divide-y divide-gray-200 text-sm lg:mt-0 lg:pr-8 lg:col-span-7">
+                <div className="pb-4 flex items-center justify-between">
+                  <dt className="text-gray-600">Shoe price</dt>
+                  <dd className="font-medium text-gray-900">{deliveryData.currencySymbol}{shoePriceData.shoePrice.toFixed(2)}</dd>
+                </div>
+                <div className="py-4 flex items-center justify-between">
+                  <dt className="text-gray-600">Delivery {isAdditionalTaxVisible && `(Additional Taxes ${deliveryData.additionalTax * 100}%)`}</dt>
+                  <dd className="font-medium text-gray-900">{deliveryData.currencySymbol}{deliveryData.totalDeliveryPrice}</dd>
+                </div>
+                {/* <div className="py-4 flex items-center justify-between">
+                  <dt className="text-gray-600">Tax</dt>
+                  <dd className="font-medium text-gray-900">$6.16</dd>
+                </div> */}
+                <div className="pt-4 flex items-center justify-between">
+                  <dt className="font-medium text-gray-900">Order total</dt>
+                  <dd className="font-medium text-indigo-600">{deliveryData.currencySymbol}{totalOrderCost.toFixed(2)}</dd>
+                </div>
+              </dl>
+            </div>
           </div>
         </div>
       </div>
