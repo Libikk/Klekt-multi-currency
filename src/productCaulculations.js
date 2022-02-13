@@ -1,6 +1,6 @@
 import { currencies, countries, sameCountryDeliveryTax } from './buisnessLogicConfig';
 
-const productCalculationsHook = ({ buyCurrencyCode, deliveryCountryCode, shoePrice, sellerCountryCode }) => {
+const productCalculations = ({ buyCurrencyCode, deliveryCountryCode, shoePrice, sellerCountryCode }) => {
     const selectedCurrencyData = currencies.find(({ currencyCode }) => currencyCode === buyCurrencyCode)
     const selectedCountryData = countries.find(({ countryCode }) => countryCode === deliveryCountryCode)
     const sellerCountryData = countries.find(({ countryCode }) => countryCode === sellerCountryCode)
@@ -41,4 +41,4 @@ const productCalculationsHook = ({ buyCurrencyCode, deliveryCountryCode, shoePri
     }
 }
 
-export default productCalculationsHook;
+export default productCalculations;

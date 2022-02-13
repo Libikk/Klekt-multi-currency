@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { RadioGroup } from '@headlessui/react'
 import './index.css';
 import { currencies, countries } from './buisnessLogicConfig';
-import productCalculationsHook from './productCaulculationsHook';
+import productCalculations from './productCaulculations';
 export const product = {
     id: 1,
     countryCode: 'UK', // US, EU, UK
@@ -31,12 +31,14 @@ export default function App() {
   const [deliveryCountryCode, setDeliveryCountryCode] = useState('UK');
   const [shoeSelectedSize, setShoeSelectedSize] = useState(product.sizes[0]);
 
-  const { deliveryData, shoePriceData, totalOrderCost } = productCalculationsHook({
+  const { deliveryData, shoePriceData, totalOrderCost } = productCalculations({
     buyCurrencyCode,
     deliveryCountryCode,
     shoePrice: shoeSelectedSize.price,
     sellerCountryCode: product.countryCode
   })
+
+  const getShoePriceFrom = (shoePrice) => productCalculations({ buyCurrencyCode, deliveryCountryCode, shoePrice, sellerCountryCode: product.countryCode}).shoePriceData.shoePrice
 
 
   const isAdditionalTaxVisible = Boolean(deliveryData.additionalTax * 100);
@@ -139,7 +141,7 @@ export default function App() {
                         >
                           <RadioGroup.Label as="div" className='flex justify-center flex-col items-center'>
                               <div>{option.size} UK</div>
-                              <div className='opacity-50'>{}{option.price}</div>
+                              <div className='opacity-50'>{deliveryData.currencySymbol}{getShoePriceFrom(option.price).toFixed(2)}</div>
                           </RadioGroup.Label>
                         </RadioGroup.Option>
                       ))}
