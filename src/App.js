@@ -15,14 +15,8 @@ export const product = {
     ],
     name: 'Distant Mountains Artwork Tee',
     description: `KLEKT is Europe's original sneaker and streetwear trading marketplace. Having been established since 2013 KLEKT has`,
-    address: ['Floyd Miles', '7363 Cynthia Pass', 'Toronto, ON N3Y 4H8'],
-    email: 'f•••@example.com',
-    phone: '1•••••••••40',
-    href: '#',
     status: 'Processing',
     step: 1,
-    date: 'March 24, 2022',
-    datetime: '2022-03-24',
     imageSrc: '/shoe.jpg',
   }
 const classNames = (...classes)  => classes.filter(Boolean).join(' ')
@@ -149,7 +143,7 @@ export default function App() {
                   </RadioGroup>
                 </div>
                   <p className="font-medium text-gray-900 mt-6 md:mt-10">
-                    {product.status} on <time dateTime={product.datetime}>{product.date}</time>
+                    {product.status} on <time dateTime={'2022-03-24'}>March 24, 2022</time>
                   </p>
                   <div className="mt-6">
                     <div className="bg-gray-200 rounded-full overflow-hidden">
