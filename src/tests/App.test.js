@@ -4,7 +4,7 @@ import {
   countries as testCountriesData
 } from './testData';
 
-
+// additional delivery
 test('additional delivery tax - same country should be 0', () => {
   const { deliveryData  } = productCalculations({
     shoePrice: 100,
@@ -31,6 +31,7 @@ test('additional delivery tax - US to UK tax should be 0.2', () => {
   expect(deliveryData.additionalTax).toEqual(0.2);
 });
 
+// shoe price
 test('shoe price - after currency exchange internaltional', () => {
   const { shoePriceData } = productCalculations({
     shoePrice: 100,
